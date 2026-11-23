@@ -60,6 +60,7 @@ python -m pip install ./ghx-deps
 ghx-deps definitions/ --allowlist office-plugins.txt
 ghx-deps-diff previous.ghx current.ghx
 ghx-groups design.ghx         # outline named canvas groups and their members
+ghx-sliders design.ghx        # list saved slider values and ranges
 ```
 
 ## License
