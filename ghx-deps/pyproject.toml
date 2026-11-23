@@ -22,6 +22,8 @@ test = ["pytest>=7"]
 ghx-deps = "ghxdeps.cli:entry"
 ghx-deps-diff = "ghxdeps.diff:main"
 ghx-groups = "ghxdeps.groups:main"
+ghx-notes = "ghxdeps.canvas:notes_cli"
+ghx-wires = "ghxdeps.canvas:wires_cli"
 
 [tool.setuptools.packages.find]
 where = ["src"]

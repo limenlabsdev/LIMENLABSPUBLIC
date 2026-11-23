@@ -98,7 +98,7 @@ class Snapshot:
     objects: dict[str, ObjectRec] = field(default_factory=dict)
 
 
-def load_snapshot(path: str) -> Snapshot:
+def read_model(path: str) -> rhino3dm.File3dm:
     p = Path(path)
     if not p.exists():
         raise ReadError(f"'{path}' does not exist. Check the path.")
@@ -110,6 +110,11 @@ def load_snapshot(path: str) -> Snapshot:
     if model is None:
         raise ReadError(f"'{path}' is not a readable .3dm file (or is truncated).")
 
+    return model
+
+
+def load_snapshot(path: str) -> Snapshot:
+    model = read_model(path)
     s = model.Settings
     settings = {
         "units": _unit_name(s.ModelUnitSystem),

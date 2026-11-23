@@ -64,3 +64,12 @@ JSON output is an array of changes, empty when the inventories match. A successf
 ## Inspect canvas groups
 
 Use `ghx-groups design.ghx` for a text outline of the groups on the top-level canvas and the components they contain. Add `--json` to get an array of groups, each with its instance ID, nickname and direct members. Nested groups appear as direct references. Each member has its instance ID and the resolved object's name and nickname. A missing reference has a null object. Empty groups are included. A valid definition without groups yields an empty array. The command returns 0 on success or 2 for bad input.
+
+### Canvas notes and wire reports
+
+Install with `python -m pip install ./ghx-deps` from the repository root.
+
+- `ghx-notes design.ghx` exports the saved text, nickname and instance ID of each top-level Panel or Scribble. Line breaks and empty notes are preserved. For wired panels the text is the saved UserText field, not evaluated upstream data.
+- `ghx-wires design.ghx` exports one row per serialized source reference with source and target port IDs, names and owning objects. It reads standalone parameters and the legacy and ParameterData component port layouts. Unknown source IDs remain visible with a null source. It does not traverse cluster interiors or run the solver.
+
+Both commands emit a JSON array to stdout in archive order. Redirect output to a file to keep a report. An empty report is a successful read (exit 0). Unreadable or invalid definitions exit 2 and write a diagnostic to stderr.
