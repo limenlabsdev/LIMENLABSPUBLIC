@@ -1,6 +1,6 @@
 # ghx-deps
 
-> **v0.1.0, alpha.** Part of [LIMEN Labs Public](https://github.com/ferall0gic/LIMENLABSPUBLIC). Tested on synthetic files only; please report what you find in an issue.
+> **v0.1.0, alpha.** Part of [LIMEN Labs Public](https://github.com/ferall0gic/LIMENLABSPUBLIC). The test suite uses synthetic files. On Windows, the dependency comparison was also checked against the original and fixed [Simple Tent definitions](https://github.com/jhorikawa/GrasshopperHowtos/tree/162e1ce72a5587dc797ae9cc8a721eae6401fab2/0096%20Simple%20Tent), [Speckle sample](https://github.com/specklesystems/GrasshopperAsyncComponent/blob/6a379d9d4f3e13f99347d9af994f63a4295cc4cf/SampleGhFile.ghx), and [McNeel component-data definition](https://github.com/mcneel/rhino.inside-revit/blob/d61a17e79608be620d7d1f5b41059ffe058eafd7/docs/update_components_data.ghx).
 
 `ghx-deps` reads Grasshopper `.ghx` definitions without Rhino and lists what each one needs: the plug-in libraries recorded in the file (name, version, author, Id), the components it uses (by name and type GUID), any script components, clusters, and absolute file paths baked into the definition. Point it at one file or a whole project folder. It prints Markdown or JSON. With an **allowlist** it becomes a CI gate that fails when a definition needs a plug-in your office hasn't approved.
 
@@ -61,3 +61,6 @@ ghx-deps-diff previous.ghx current.ghx --json --check
 Each changed record shows its count before and after. A plug-in version change produces two rows, one for the old version and one for the new. Components are grouped by recorded name and type GUID. Absolute file references use the same detection rules as `ghx-deps`, with each distinct path counted once. Reordering components has no effect. Edits to wiring, scripts, or parameter values are outside the comparison unless they also change a recorded dependency.
 
 JSON output is an array of changes, empty when the inventories match. A successful comparison exits 0. With `--check`, changes exit 1. Unreadable or invalid input exits 2 and writes a diagnostic to stderr.
+## Inspect canvas groups
+
+Use `ghx-groups design.ghx` for a text outline of the groups on the top-level canvas and the components they contain. Add `--json` to get an array of groups, each with its instance ID, nickname and direct members. Nested groups appear as direct references. Each member has its instance ID and the resolved object's name and nickname. A missing reference has a null object. Empty groups are included. A valid definition without groups yields an empty array. The command returns 0 on success or 2 for bad input.

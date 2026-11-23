@@ -92,7 +92,7 @@ def _child(chunk, name: str):
     return found[0] if found else None
 
 
-def read_manifest(path: str | Path) -> Manifest:
+def read_definition(path: str | Path) -> tuple[ET.Element, ET.Element]:
     p = Path(path)
     if p.suffix.lower() == ".gh":
         raise GhxError(
@@ -112,6 +112,11 @@ def read_manifest(path: str | Path) -> Manifest:
     if definition is None:
         raise GhxError(f"'{p}' has no Definition chunk; it is not a Grasshopper definition.")
 
+    return root, definition
+
+
+def read_manifest(path: str | Path) -> Manifest:
+    root, definition = read_definition(path)
     m = Manifest(path=str(path))
     m.archive_version = _version(_items(root).get("ArchiveVersion"))
     m.grasshopper_version = _version(_items(definition).get("plugin_version"))
