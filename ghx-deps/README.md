@@ -48,3 +48,16 @@ Open an issue at https://github.com/ferall0gic/LIMENLABSPUBLIC/issues with the c
 ## License
 
 MIT (see LICENSE). No third-party code is included.
+
+## Compare two revisions
+
+Install the package as above, then run:
+
+```console
+ghx-deps-diff previous.ghx current.ghx
+ghx-deps-diff previous.ghx current.ghx --json --check
+```
+
+Each changed record shows its count before and after. A plug-in version change produces two rows, one for the old version and one for the new. Components are grouped by recorded name and type GUID. Absolute file references use the same detection rules as `ghx-deps`, with each distinct path counted once. Reordering components has no effect. Edits to wiring, scripts, or parameter values are outside the comparison unless they also change a recorded dependency.
+
+JSON output is an array of changes, empty when the inventories match. A successful comparison exits 0. With `--check`, changes exit 1. Unreadable or invalid input exits 2 and writes a diagnostic to stderr.
