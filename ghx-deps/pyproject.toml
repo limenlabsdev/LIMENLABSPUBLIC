@@ -21,6 +21,7 @@ test = ["pytest>=7"]
 [project.scripts]
 ghx-deps = "ghxdeps.cli:entry"
 ghx-deps-diff = "ghxdeps.diff:main"
+ghx-groups = "ghxdeps.groups:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
