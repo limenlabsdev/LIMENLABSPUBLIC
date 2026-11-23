@@ -64,3 +64,9 @@ JSON output is an array of changes, empty when the inventories match. A successf
 ## Inspect canvas groups
 
 Use `ghx-groups design.ghx` for a text outline of the groups on the top-level canvas and the components they contain. Add `--json` to get an array of groups, each with its instance ID, nickname and direct members. Nested groups appear as direct references. Each member has its instance ID and the resolved object's name and nickname. A missing reference has a null object. Empty groups are included. A valid definition without groups yields an empty array. The command returns 0 on success or 2 for bad input.
+
+## Review slider settings
+
+Run `ghx-sliders design.ghx` to see each top-level Number Slider's nickname, instance ID, saved value, minimum and maximum. The ID distinguishes sliders with the same nickname. Add `--json` for an array in archive order. Numeric fields are strings to retain the exact saved precision. Missing values appear as null in JSON and as `?` in text. The command reads the saved definition without running it. Sliders inside cluster definitions are outside its scope.
+
+Valid input exits 0, including a canvas with zero sliders. Invalid input exits 2 with a diagnostic on stderr.

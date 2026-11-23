@@ -22,6 +22,7 @@ test = ["pytest>=7"]
 ghx-deps = "ghxdeps.cli:entry"
 ghx-deps-diff = "ghxdeps.diff:main"
 ghx-groups = "ghxdeps.groups:main"
+ghx-sliders = "ghxdeps.sliders:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
