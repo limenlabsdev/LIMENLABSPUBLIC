@@ -20,6 +20,9 @@ test = ["pytest>=7"]
 
 [project.scripts]
 3dm-diff = "diff3dm.cli:entry"
+3dm-layers = "diff3dm.inventory:layers_cli"
+3dm-tags = "diff3dm.inventory:tags_cli"
+3dm-duplicates = "diff3dm.inventory:duplicates_cli"
 
 [tool.setuptools.packages.find]
 where = ["src"]

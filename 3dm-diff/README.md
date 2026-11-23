@@ -71,3 +71,13 @@ Open an issue at https://github.com/ferall0gic/LIMENLABSPUBLIC/issues with the c
 ## License
 
 MIT (see LICENSE). `rhino3dm` is McNeel's, under the MIT license. No third-party code is included.
+
+### Single-model reports
+
+| Command | JSON output |
+|---|---|
+| `3dm-layers model.3dm` | One row per layer with its ID, full path, visibility, lock state and direct object count. Includes empty layers. Unresolved layer indices have their own row with null ID and path. Counts are from the saved object table, without expanding block placements. |
+| `3dm-tags model.3dm` | Document user text plus object IDs, names and attribute user strings for tagged objects. Geometry-attached user data is outside its scope. |
+| `3dm-duplicates model.3dm` | Groups of object IDs with the same SHA-256 digest of serialized geometry, regardless of layer or attribute name. Distinct serializations of visually identical shapes may differ. Objects the library cannot hash appear in a separate list. |
+
+Installed with `python -m pip install ./3dm-diff` from the repository root. Redirect stdout to save a report. Successful reads exit 0, including empty results. Invalid input exits 2 with a diagnostic on stderr. All three tools read the file without modifying it.

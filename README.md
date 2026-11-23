@@ -62,6 +62,10 @@ ghx-deps-diff previous.ghx current.ghx
 ghx-groups design.ghx         # outline named canvas groups and their members
 ```
 
+## Additional handoff tools
+
+The [3dm-diff package](3dm-diff/) includes `3dm-layers` for layer counts, `3dm-tags` for user text and `3dm-duplicates` for identical serialized geometry. The [ghx-deps package](ghx-deps/) includes `ghx-notes` for canvas annotations and `ghx-wires` for wire endpoints. Each command accepts one file and prints JSON.
+
 ## License
 
 MIT. See [LICENSE](LICENSE). Copyright (c) 2026 Sydney DeVille.
