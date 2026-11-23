@@ -68,3 +68,30 @@ def tags_cli():
 
 def duplicates_cli():
     return run(duplicates, "Find object IDs with identical serialized geometry.")
+
+
+def named_views(model):
+    """Return saved named cameras in model order, including repeated names."""
+    rows = []
+    for view in model.NamedViews:
+        vp = view.Viewport
+        if vp.IsTwoPointPerspectiveProjection:
+            projection = "two-point perspective"
+        elif vp.IsPerspectiveProjection:
+            projection = "perspective"
+        elif vp.IsParallelProjection:
+            projection = "parallel"
+        else:
+            projection = "unknown"
+        rows.append({
+            "name": view.Name,
+            "projection": projection,
+            "camera_location": [vp.CameraLocation.X, vp.CameraLocation.Y, vp.CameraLocation.Z],
+            "camera_direction": [vp.CameraDirection.X, vp.CameraDirection.Y, vp.CameraDirection.Z],
+            "camera_up": [vp.CameraUp.X, vp.CameraUp.Y, vp.CameraUp.Z],
+        })
+    return rows
+
+
+def views_cli():
+    return run(named_views, "Export saved Rhino named views and their camera frames as JSON.")
