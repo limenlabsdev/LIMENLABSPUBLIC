@@ -58,6 +58,7 @@ python -m pip install ./3dm-diff
 ```text
 python -m pip install ./ghx-deps
 ghx-deps definitions/ --allowlist office-plugins.txt
+ghx-deps-diff previous.ghx current.ghx
 ```
 
 ## License
